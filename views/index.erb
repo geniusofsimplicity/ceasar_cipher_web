@@ -1,26 +1,128 @@
 <html>
 <head>
 	<style>
-		body { background: white; }
-		
-  </style>
+	body { background: #DAF7A6; }
+
+	.description{
+		background: #EAEDED;
+		margin: 0cm 1cm 1cm 1cm;
+		text-align: center;
+		font-style: italic;
+	}
+	#desc_big{
+		font-size: 36px;
+	}
+	#desc_small{			
+		font-size: 14px;
+	}
+	.text{
+		margin: 10px auto;
+		width: 100%;
+		height: 30px;		
+	}
+	form{
+/*			margin: auto;
+	    width: 90%;
+	    border: 5px solid green;
+	    padding: 10px;*/
+	  }
+	  .card{
+	  	margin: 15px auto;
+	  	width: 90%;
+	  	border: 5px solid green;
+	  	padding: 10px;
+	  	text-align: center;
+	  }
+	  #factor_input{
+	  	width: 20px;
+	  }
+	  #normal_text_text{
+	  	/*text-align: center;*/
+	  }
+	  #shift_factor_text{
+	  	/*text-align: center;*/
+	  }
+	  #cipher_button{
+	  	margin: 5px auto;
+	  	padding: 10px;
+	  	background: #85C1E9;
+	  }
+	  #ciphered_text{
+	  	background: #85C1E9;
+	  }
+
+	</style>
 </head>
 <body>
-	<p>
-		Here you can cipher you text by the usage of Caesar Cipher.
-	</p>
-	<form>
-		Normal text:<br>
-		<input type='text' name='normal_text' /><br>
-		Shift factor:<br>
-		<input type='text' name='shift_factor' /><br>
-		<input type='submit' value='Cipher!' />
-	</form>
-	<p>
-		The result is: <%= ciphered_text %>		
-	</p>
-	<p>
+
+
+
+	<div class="description">
+		<p id="desc_big">
+			Here you can encrypt you text with <br>Caesar Cipher.
+		</p>
+		<p id="desc_small">
+			It is a type of substitution cipher in which each letter in the plaintext is replaced by a letter some fixed number of positions down the alphabet.
+		</p>
+	</div>
+	
+	<form name="form1" class="card">
+		<div>
+			<div id="normal_text_text">
+				Normal text:<br>
+			</div>
+			<div>
+				<input type='text' name='normal_text' class="text" id="text_input"/><br>
+			</div>
+		</div>
+		<div id="shift_factor_text">
+			Shift factor (1-25):		
+			<input type='text' name='shift_factor' id="factor_input"/><br>
+		</div>
 		
-	</p>
+		<div>
+			<input type='submit' onclick="return saveInput();" value='Cipher!' id="cipher_button"/>
+		</div>
+	</form>
+	<div class="card">
+		<p>
+			The result is: <br>
+			<div id="ciphered_text" class="text">
+				<%= ciphered_text %>
+			</div>		
+		</p>
+	</div>
+
+
+	<script type="text/javascript">
+		var text_input = localStorage.getItem("text");
+		var factor_input = localStorage.getItem("cipher_shift");
+		if (text_input){
+			document.getElementById("text_input").value = text_input
+		}
+		
+		if (factor_input > 0){
+			document.getElementById("factor_input").value = factor_input;
+		}		
+		
+
+		function saveInput() {
+			
+	    var text = document.getElementById("text_input").value;
+	    var cipher_shift = document.getElementById("factor_input").value;
+	    if (text == "" || cipher_shift == "") {
+	        alert("Please enter a text and cipher shift first!");
+	        return false;
+	    }
+
+	    localStorage.setItem("text", text);
+	    localStorage.setItem("cipher_shift", cipher_shift);
+
+	    location.reload();
+	    // return false;
+	    return true;
+		}
+	</script>
+
 </body>
 </html>

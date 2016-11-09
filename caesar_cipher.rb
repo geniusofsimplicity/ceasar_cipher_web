@@ -5,7 +5,7 @@ helpers do
 	def caesar_cipher(text, shift) 
 		result = ""
 		text.each_byte do |code|
-			unless " !0123456789".scan(/./).include?(code.chr)
+			unless " !0123456789?.,".scan(/./).include?(code.chr)
 				code_init = code
 				shift = shift % 26
 				code += shift
